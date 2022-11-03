@@ -15,7 +15,7 @@ class Graph:
 		self.graph[u].append(v)
 
 	# A recursive function used by topologicalSort
-	def topologicalSortUtil(self, v, visited, stack):
+	def modified_dfs(self, v, visited, stack):
 
 		# Mark the current node as visited.
 		visited[v] = True
@@ -23,7 +23,7 @@ class Graph:
 		# Recur for all the vertices adjacent to this vertex
 		for i in self.graph[v]:
 			if visited[i] == False:
-				self.topologicalSortUtil(i, visited, stack)
+				self.modified_dfs(i, visited, stack)
 
 		# Push current vertex to stack which stores result
 		stack.append(v)
@@ -39,7 +39,7 @@ class Graph:
 		# Sort starting from all vertices one by one
 		for i in range(self.V):
 			if visited[i] == False:
-				self.topologicalSortUtil(i, visited, stack)
+				self.modified_dfs(i, visited, stack)
 
 		# Print contents of the stack
 		print(stack[::-1]) # return list in reverse order
